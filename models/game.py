@@ -6,7 +6,7 @@ class Game:
     def __init__(self):
         self.secret_number = random.randint(1, 5)
         self.human = HumanPlayer("Player")
-        self.computer = SmartComputerPlayer("Computer")
+        self.computer = SmartComputerPlayer("Computer", self.human)
 
     def start(self):
         print("Welcome to Guess the Number!")

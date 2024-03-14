@@ -3,13 +3,11 @@ from unittest.mock import patch
 import io
 
 def test_game(monkeypatch):
-    # Set a fixed secret number for testing
     with monkeypatch.context() as m:
         m.setattr('random.randint', lambda a, b: 3)
         
         game_instance = Game()
-        
-        # Set up input for human player guesses
+
         inputs = ['2', '4']
         with patch('builtins.input', side_effect=inputs):
             with patch('sys.stdout', new_callable=io.StringIO) as fake_out:
