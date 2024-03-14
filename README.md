@@ -1,1 +1,5 @@
-# guess-the-number
+## guess-the-number
+
+### Dependecies install
+
+`pip install -r requirements.txt`
