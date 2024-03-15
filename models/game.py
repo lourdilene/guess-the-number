@@ -1,16 +1,19 @@
 from models.human_player import HumanPlayer
 from models.smart_computer_player import SmartComputerPlayer
+from models.constantes import Constantes
+
 import random
 
 class Game:
     def __init__(self):
-        self.secret_number = random.randint(1, 5)
+        self.secret_number = random.randint(1, Constantes.MAX_GUESS_NUMBER.value)
         self.human = HumanPlayer("Player")
-        self.computer = SmartComputerPlayer("Computer", self.human)
+        self.computer = SmartComputerPlayer("Computer", self)
+        self.all_guesses = []
 
     def start(self):
         print("Welcome to Guess the Number!")
-        print("Try to guess the secret number between 1 and 5.")
+        print(f"Try to guess the secret number between 1 and {Constantes.MAX_GUESS_NUMBER.value}")
 
     def check_guess(self, guess):
         if guess == self.secret_number:
@@ -22,8 +25,11 @@ class Game:
 
     def play_make_guess(self, player):
         guess = player.make_guess()
+        #self.all_guesses.append(guess)
         result = self.check_guess(guess)
         print(f"{player.name}, your guess is {result}.")
+
+        print(f"all guesses: {self.all_guesses}")
         return result
 
     def end_game(self, winner):
