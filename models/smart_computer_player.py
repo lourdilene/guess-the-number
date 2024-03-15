@@ -16,6 +16,8 @@ class SmartComputerPlayer(Player):
         all_guesses = self.game.all_guesses
         print(f"all_guesses: {all_guesses}")
 
+        pdb.set_trace()
+
         X = np.array([[i] for i in range(1, len(all_guesses) + 1)])  # Números de tentativas
         y = np.array(all_guesses)  # Palpites correspondentes
 
