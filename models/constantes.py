@@ -1,4 +1,4 @@
 from enum import Enum
 
 class Constantes(Enum):
-    MAX_GUESS_NUMBER = 50
+    MAX_GUESS_NUMBER = 100

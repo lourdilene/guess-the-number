@@ -23,7 +23,7 @@ class Game:
         if guess == self.secret_number:
             return "correct"
         elif guess < self.secret_number:
-            self.possible_guesses = all_possible_guesses[index_guess:]
+            self.possible_guesses = all_possible_guesses[1 + index_guess:]
             return "too low"
         else:
             self.possible_guesses = all_possible_guesses[:index_guess]
@@ -34,7 +34,7 @@ class Game:
         result = self.check_guess(guess)
         print(f"{player.name}, your guess is {result}.")
 
-        print(f"secret_number: {self.secret_number}")
+        # print(f"secret_number: {self.secret_number}")
         print(f"all_guesses: {self.all_guesses}")
         print(f"possible_guesses: {self.possible_guesses}")
 
