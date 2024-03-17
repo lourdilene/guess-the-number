@@ -29,6 +29,9 @@ class SmartComputerPlayer(Player):
             # Previsão do próximo palpite
             # next_guess = self.model.predict([[self.guesses[-1] + 1]])[0]  # Faz a previsão para o próximo número após o último palpite
             next_guess = self.model.predict([[self.guesses[-1] + 1]])[0]
+            # print(all_guesses)
+            # print(possible_guesses)
+            # print(next_guess)
             # next_guess = max(1, min(int(round(next_guess)), Constantes.MAX_GUESS_NUMBER.value))  # Garante que o palpite esteja dentro do intervalo [1, 50]
             next_guess = min(possible_guesses, key=lambda x: abs(x - next_guess))
 
