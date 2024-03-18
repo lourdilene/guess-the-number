@@ -1,9 +1,11 @@
 from models.human_player import HumanPlayer
+from models.game import Game  
 from unittest.mock import patch
 import io
 
 def test_make_guess():
-    player = HumanPlayer("TestPlayer")
+    game = Game() 
+    player = HumanPlayer("TestPlayer", game)  
 
     inputs = ['3']
     with patch('builtins.input', side_effect=inputs) as mocked_input:
@@ -11,7 +13,5 @@ def test_make_guess():
             guess = player.make_guess()
 
     assert player.guesses == [3]
-
     assert guess == 3
-
     assert mocked_input.call_args_list == [(('TestPlayer, enter your guess: ',),)]
