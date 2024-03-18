@@ -21,18 +21,16 @@ class SmartComputerPlayer(Player):
             all_guesses = np.array(self.game.all_guesses).reshape(-1, 1)  # Transforma a lista de palpites em uma matriz 2D
             possible_guesses = self.game.possible_guesses[:len(self.guesses)]  # Ajusta o número de palpites possíveis
 
-            if len(all_guesses) != len(possible_guesses):
+            if len(all_guesses) != len(self.guesses):
                 all_guesses = all_guesses[:len(possible_guesses)]
 
             self.model.fit(all_guesses, possible_guesses)  # Ajusta o modelo aos palpites e aos palpites possíveis
 
             # Previsão do próximo palpite
-            # next_guess = self.model.predict([[self.guesses[-1] + 1]])[0]  # Faz a previsão para o próximo número após o último palpite
+            # Faz a previsão para o próximo número após o último palpite
             next_guess = self.model.predict([[self.guesses[-1] + 1]])[0]
-            # print(all_guesses)
-            # print(possible_guesses)
-            # print(next_guess)
-            # next_guess = max(1, min(int(round(next_guess)), Constantes.MAX_GUESS_NUMBER.value))  # Garante que o palpite esteja dentro do intervalo [1, 50]
+            
+            # Garante que o palpite esteja dentro do intervalo [1, 50]
             next_guess = min(possible_guesses, key=lambda x: abs(x - next_guess))
 
             # Adiciona o palpite à lista de palpites e imprime

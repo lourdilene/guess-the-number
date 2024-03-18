@@ -1,28 +1,35 @@
-import pytest
+import unittest
+from unittest.mock import Mock, patch
+import numpy as np
 from models.smart_computer_player import SmartComputerPlayer
 
-@pytest.fixture
-def smart_computer_player():
-    return SmartComputerPlayer("Computer")
+class TestSmartComputerPlayer(unittest.TestCase):
+    def test_make_guess_first_guess(self):
+        game_mock = Mock()
+        game_mock.possible_guesses = [1, 2, 3, 4, 5]
+        game_mock.all_guesses = []
+        player = SmartComputerPlayer("Computer", game_mock)
 
-def test_make_guess(smart_computer_player, monkeypatch):
-    monkeypatch.setattr('random.randint', lambda a, b: 3)
+        with patch('random.choice', return_value=3):
+            guess = player.make_guess()
 
-    guess = smart_computer_player.make_guess()
-    assert 1 <= guess <= 5
+        self.assertEqual(guess, 3)
+        self.assertEqual(player.guesses, [3])
+        self.assertEqual(game_mock.all_guesses, [3])
 
-    smart_computer_player.guesses = [1, 2, 3, 4]
-    guess = smart_computer_player.make_guess()
-    assert 1 <= guess <= 5
+    def test_make_guess_subsequent_guess(self):
+        game_mock = Mock()
+        game_mock.possible_guesses = [1, 5]
+        game_mock.all_guesses = [2, 3, 4]
+        player = SmartComputerPlayer("Computer", game_mock)
+        player.guesses = [2, 3]
 
-    smart_computer_player.guesses = [5]
-    guess = smart_computer_player.make_guess()
-    assert 1 <= guess <= 5
+        with patch.object(player.model, 'predict', return_value=np.array([4])):
+            guess = player.make_guess()
+        
+        self.assertEqual(guess, 5)
+        self.assertEqual(player.guesses, [2, 3, 5])
+        self.assertEqual(game_mock.all_guesses, [2, 3, 4, 5])
 
-    smart_computer_player.guesses = [1]
-    guess = smart_computer_player.make_guess()
-    assert 1 <= guess <= 5
-
-    smart_computer_player.guesses = [3]
-    guess = smart_computer_player.make_guess()
-    assert 1 <= guess <= 5
+if __name__ == '__main__':
+    unittest.main()
