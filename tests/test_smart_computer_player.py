@@ -24,7 +24,7 @@ class TestSmartComputerPlayer(unittest.TestCase):
         player = SmartComputerPlayer("Computer", game_mock)
         player.guesses = [2, 3]
 
-        with patch.object(player.model, 'predict', return_value=np.array([4])):
+        with patch.object(player.model, 'predict', return_value=np.array([5])):
             guess = player.make_guess()
         
         self.assertEqual(guess, 5)

@@ -38,7 +38,7 @@ class Game:
         guess = player.make_guess()
         result = self.check_guess(guess)
 
-        clear_console()
+        #clear_console()
 
         self.result_guesses.append(f"{player.name}, your guess {guess} is {result}.")
 
