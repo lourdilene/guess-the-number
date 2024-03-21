@@ -10,9 +10,9 @@ import random
 class Game:
     def __init__(self):
         self.secret_number = random.randint(1, Constantes.MAX_GUESS_NUMBER.value)
-        self.human = HumanPlayer("Player", self)
-        self.computer = SmartComputerPlayer("Computer", self)
-        self.all_guesses = []
+        self.human = HumanPlayer("Player")
+        self.computer = SmartComputerPlayer("Computer", self, self.human)
+        # self.all_guesses = []
         self.result_guesses = []
         self.possible_guesses = list(range(1, Constantes.MAX_GUESS_NUMBER.value + 1))
 
@@ -37,13 +37,18 @@ class Game:
     def play_make_guess(self, player):
         guess = player.make_guess()
         result = self.check_guess(guess)
+        print(f"result: {result}")
+        self.computer.all_guesses.append({'guess': guess, 'result': result})
+        #print(f"self.computer.all_guesses: {self.computer.all_guesses}")
 
-        #clear_console()
+        # clear_console()
 
-        self.result_guesses.append(f"{player.name}, your guess {guess} is {result}.")
+        #self.result_guesses.append(f"{player.name}, your guess {guess} is {result}.")
 
-        for result_guess in self.result_guesses:
-            print(result_guess)
+        #Para imprimir todos os palpites e resultados
+        # for guess_result in self.computer.all_guesses:
+        #     for guess, result in guess_result.items():
+        #         print(f"Guess: {guess}, Result: {result}")
 
         return result
 
