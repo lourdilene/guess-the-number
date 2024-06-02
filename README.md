@@ -62,10 +62,12 @@ To deactivate the virtual environment when you are done working, simply run the 
 deactivate
 ```
 
-### Run tests
+5. **Run Tests:**
 
 To run tests, use the following command:
 
 ```bash
 pytest
 ```
+
+6. **UML Class:**

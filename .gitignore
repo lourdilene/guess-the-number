@@ -1,3 +1,5 @@
 __pychache__/
 .pytest_cache/
 models/__pycache__/
+utils/__pycache__/
+venv
