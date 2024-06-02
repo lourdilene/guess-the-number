@@ -70,4 +70,9 @@ To run tests, use the following command:
 pytest
 ```
 
-6. **UML Class:**
+6. *** UML Class Diagram ***
+
+![UML Class Diagram](https://github.com/lourdilene/guess-the-number/blob/main/uml/guess_the_number_UML_class.jpeg)
+
+This UML class diagram provides a visual representation of the class structure and relationships within the project.
+
